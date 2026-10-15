@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分享生活配置",
+  "usingComponents": {
+    "ui-icon": "/components/icon/icon"
+  }
+}

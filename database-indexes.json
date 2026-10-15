@@ -1,0 +1,15 @@
+{
+  "CreateIndexes": [
+    {
+      "IndexName": "owner_created_id",
+      "MgoKeySchema": {
+        "MgoIsUnique": false,
+        "MgoIndexKeys": [
+          { "Name": "owner", "Direction": "1" },
+          { "Name": "createdAt", "Direction": "-1" },
+          { "Name": "_id", "Direction": "1" }
+        ]
+      }
+    }
+  ]
+}

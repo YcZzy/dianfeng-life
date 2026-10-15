@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "巅峰人生",
+  "usingComponents": {
+    "ui-icon": "/components/icon/icon"
+  }
+}

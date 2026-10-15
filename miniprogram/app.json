@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/quiz/quiz",
+    "pages/result/result",
+    "pages/share/share",
+    "pages/records/records",
+    "pages/about/about"
+  ],
+  "window": {
+    "navigationBarTitleText": "巅峰人生",
+    "navigationBarBackgroundColor": "#F5F4EF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F4EF"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

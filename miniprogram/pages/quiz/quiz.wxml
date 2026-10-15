@@ -1,0 +1,20 @@
+<view class="page quiz">
+  <view wx:if="{{sample}}" class="tag tag-accent preview-tag">界面体验 · 完成后展示固定示例，不上传答案</view>
+  <block wx:if="{{phase === 'answering'}}">
+    <view class="between"><text class="eyebrow">生活配置测试</text><text class="caption num">{{number}}<text class="question-count"> / {{total}}</text></text></view>
+    <view class="progress-track"><view class="progress-fill" style="width:{{progress}}%;"></view></view>
+    <view class="question-title">{{question.title}}</view>
+    <button wx:if="{{question.help}}" class="help-toggle" bindtap="onHelp" aria-expanded="{{helpOpen}}"><ui-icon name="info" color="muted" size="28" /><text>{{helpOpen ? '收起口径说明' : '怎么算？看口径说明'}}</text></button>
+    <view wx:if="{{helpOpen}}" class="question-help">{{question.help}}</view>
+    <view class="answer-list">
+      <button wx:for="{{options}}" wx:key="id" class="answer {{selected === item.id ? 'answer-selected' : ''}}" data-qid="{{question.id}}" data-oid="{{item.id}}" bindtap="onChoose" aria-label="{{item.text}}" aria-pressed="{{selected === item.id}}">
+        <view class="answer-marker"><ui-icon wx:if="{{selected === item.id}}" name="check" color="white" size="28" /><text wx:else class="num">{{item.id === 'N' ? '—' : item.id}}</text></view><text class="grow">{{item.text}}</text>
+      </button>
+    </view>
+    <view class="skip-row"><button wx:for="{{skips}}" wx:key="id" class="text-btn {{selected === item.id ? 'accent' : ''}}" data-qid="{{question.id}}" data-oid="{{item.id}}" bindtap="onChoose">{{item.text}}</button></view>
+    <view wx:if="{{storageError}}" class="error">{{storageError}}</view>
+    <view class="quiz-footer"><button class="text-btn" disabled="{{number === 1}}" bindtap="onPrev"><ui-icon name="back" color="muted" size="28" />上一题</button><text class="caption">选完自动下一题</text><view class="footer-balance"></view></view>
+  </block>
+  <view wx:elif="{{phase === 'submitting' || phase === 'ready'}}" class="center-state"><view class="submit-mark"><ui-icon name="compass" size="72" /></view><view class="title space"><view>正在拼出</view><view>你的生活配置</view></view><view class="caption space">答案已收齐，正在生成报告。</view></view>
+  <view wx:elif="{{phase === 'failed'}}" class="center-state"><ui-icon name="info" color="accent" size="64" /><view class="section-title">这次提交没有完成</view><view class="error space" role="alert">{{error}}</view><button class="btn btn-primary" bindtap="onRetry">重新提交</button><button class="text-btn space" bindtap="onPrev">返回检查最后一题</button></view>
+</view>

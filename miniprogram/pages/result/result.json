@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "生活配置报告",
+  "usingComponents": {
+    "ui-icon": "/components/icon/icon"
+  }
+}

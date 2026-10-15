@@ -1,0 +1,19 @@
+.masthead { padding: 8rpx 0 28rpx; border-bottom: 1rpx solid var(--line); }
+.brand-mark { width: 26rpx; height: 26rpx; border: 6rpx solid var(--accent); border-top-width: 3rpx; transform: rotate(-8deg); }
+.hero { padding: 42rpx 0 32rpx; }
+.hero-title { font-family: "Songti SC", "STSong", serif; font-weight: 600; font-size: 68rpx; line-height: 1.25; margin-top: 22rpx; }
+.hero-sub { color: var(--muted); font-size: 27rpx; margin-top: 20rpx; line-height: 1.75; }
+.sample-card { display: block; width: 100%; text-align: left; padding: 28rpx; border: 1rpx solid #D1D5CC; border-radius: 22rpx; background: #E9EDE4; }
+.sample-middle { display: flex; align-items: center; justify-content: space-between; margin-top: 16rpx; }
+.sample-number { font-size: 108rpx; line-height: 1.05; font-weight: 500; color: var(--dark); }
+.sample-number text { font-size: 44rpx; margin-left: 4rpx; }
+.sample-seal { width: 116rpx; height: 116rpx; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--dark); }
+.sample-bottom { display: flex; align-items: center; gap: 12rpx; border-top: 1rpx solid #CBD2C7; margin-top: 24rpx; padding-top: 20rpx; }
+.sample-persona { font-size: 32rpx; font-weight: 600; margin-bottom: 6rpx; }
+.dimension-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22rpx 12rpx; margin: 30rpx 0; }
+.dimension-item { display: flex; align-items: center; gap: 8rpx; font-size: 23rpx; }
+.start-area { margin-top: 30rpx; }
+.start-meta { margin-top: 16rpx; text-align: center; }
+.home-links { display: flex; align-items: center; justify-content: center; gap: 24rpx; margin-top: 18rpx; }
+.link-divider { width: 1rpx; height: 24rpx; background: var(--line); }
+.home .footer-note { margin-top: 16rpx; }

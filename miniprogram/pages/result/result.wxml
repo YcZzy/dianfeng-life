@@ -1,0 +1,22 @@
+<view class="page result">
+  <block wx:if="{{loading}}"><view class="skeleton" style="height:500rpx;"></view><view class="skeleton"></view></block>
+  <view wx:elif="{{error}}" class="center-state"><ui-icon name="info" color="accent" size="64" /><view class="section-title">报告暂时没有打开</view><view class="error" role="alert">{{error}}</view><button class="btn btn-primary" bindtap="fetch">重新加载</button><button class="text-btn" bindtap="onHome">返回首页</button></view>
+  <block wx:elif="{{report}}">
+    <view wx:if="{{sample}}" class="sample-notice">固定示例报告 · 不代表你的作答结果</view>
+    <view class="between"><text class="eyebrow">你的生活配置报告</text><text class="tag">{{sample ? '界面示例' : '本次结果'}}</text></view>
+    <view class="rank-area">
+      <block wx:if="{{report.rank.available}}"><view class="caption rank-label">{{sample ? '示例 · 估算超过' : '综合生活状态 · 估算超过'}}</view><view class="rank-number num">{{report.rank.percent}}<text>%</text></view><view class="rank-tail">的同龄人</view></block>
+      <block wx:else><view class="title no-rank">{{report.rank.headline}}</view></block>
+      <view class="rank-note">{{report.rank.note}}</view>
+    </view>
+    <view class="persona-card"><view class="persona-top"><text class="eyebrow">你的生活类型</text><ui-icon name="compass" color="accent" size="36" /></view><view class="persona-title">{{report.persona.title}}</view><view class="persona-line">{{report.persona.line}}</view><view class="persona-description">{{report.persona.description}}</view><view wx:if="{{report.score !== null}}" class="persona-score"><text class="caption">本次综合指数</text><text class="num">{{report.score}}<text class="caption"> / 100</text></text></view></view>
+    <button class="btn btn-primary space" bindtap="onShareCard"><ui-icon name="share" color="white" size="36" />这有点像我，生成分享卡</button>
+    <view class="caption share-hint">分享只展示综合结果，不展示具体答案</view>
+    <view class="space-lg"><view class="section-title">为什么是这个结果</view><view wx:for="{{report.insights}}" wx:key="title" class="insight"><view class="insight-title">{{item.title}}</view><view class="body insight-body">{{item.body}}</view></view></view>
+    <button wx:if="{{report.persona.evidence.length}}" class="evidence-toggle" bindtap="onExpand" aria-expanded="{{expanded}}"><text>看看答案依据</text><ui-icon name="{{expanded ? 'back' : 'chevron'}}" color="muted" size="28" /></button>
+    <view wx:if="{{expanded}}" class="evidence-list"><view wx:for="{{report.persona.evidence}}" wx:key="questionId" class="evidence-item"><view class="caption">{{item.title}}</view><view class="body">{{item.answer}}</view></view><view wx:if="{{secondaryTags.length}}" class="secondary-tags"><view class="caption">你也有这些侧面</view><view class="tag-list"><text wx:for="{{secondaryTags}}" wx:key="key" class="tag">{{item.title}}</text></view></view></view>
+    <view class="space-lg"><view class="between"><view class="section-title">六个方面，拆开看看</view><button class="text-btn" bindtap="onAbout">怎么算的<ui-icon name="chevron" color="muted" size="24" /></button></view><view class="axes-card"><view wx:for="{{axes}}" wx:key="id" class="axis"><view class="row"><ui-icon name="{{item.icon}}" size="34" /><view class="grow"><view class="between"><text class="axis-name">{{item.name}}</text><text class="num axis-score">{{item.scoreText}}</text></view><view class="axis-track"><view class="axis-fill" style="width:{{item.bar}}%;"></view></view><view class="eyebrow axis-short">{{item.short}}</view></view></view></view></view></view>
+    <view wx:if="{{report.goal}}" class="goal-card space-lg"><view class="between"><view class="row"><ui-icon name="target" color="accent" size="34" /><text class="eyebrow accent">今天，只做这一小步</text></view><text class="tag tag-accent">约 {{report.goal.minutes}} 分钟</text></view><view class="section-title space">{{report.goal.title}}</view><view class="body space">{{report.goal.description}}</view><view wx:if="{{goalError}}" class="error space" role="alert">{{goalError}}</view><button class="btn btn-secondary space" disabled="{{report.goal.done || completing}}" loading="{{completing}}" bindtap="onCompleteGoal"><ui-icon wx:if="{{report.goal.done}}" name="check" color="muted" size="30" />{{report.goal.done ? '这一步，已经完成' : '我完成了这一步'}}</button><view class="eyebrow space">记录一次尝试，不会直接改变本次分数。</view></view>
+    <view class="footer-note">描述的是本次生活状态，不替你定义人生。<view wx:if="{{report.completion}}">有效计分项 {{report.completion.valid}} / {{report.completion.total}}</view></view><button class="text-btn" bindtap="onHome">回到首页</button>
+  </block>
+</view>

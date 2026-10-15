@@ -1,0 +1,19 @@
+.quiz { padding-bottom: calc(150rpx + env(safe-area-inset-bottom)); }
+.preview-tag { margin-bottom: 24rpx; }
+.question-count { color: var(--muted); font-size: 24rpx; }
+.progress-track { height: 6rpx; background: #DDDED5; border-radius: 6rpx; margin: 22rpx 0 40rpx; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 6rpx; }
+.question-title { font-size: 36rpx; line-height: 1.6; font-weight: 600; }
+.help-toggle { display: flex; align-items: center; gap: 10rpx; color: var(--muted); font-size: 24rpx; text-align: left; padding: 18rpx 0; min-height: 72rpx; }
+.question-help { font-size: 25rpx; color: var(--muted); line-height: 1.8; background: #ECEDE6; border-radius: 14rpx; padding: 20rpx; margin-bottom: 12rpx; }
+.answer-list { display: flex; flex-direction: column; gap: 14rpx; margin-top: 24rpx; }
+.answer { display: flex; align-items: center; gap: 20rpx; padding: 22rpx 24rpx; min-height: 88rpx; text-align: left; border: 1rpx solid var(--line); border-radius: 18rpx; background: var(--surface); font-size: 28rpx; font-weight: 400; }
+.answer-marker { display: flex; align-items: center; justify-content: center; width: 42rpx; height: 42rpx; border: 1rpx solid var(--line); border-radius: 50%; flex-shrink: 0; color: var(--muted); font-size: 23rpx; }
+.answer-selected { border: 2rpx solid var(--accent); background: var(--tint); padding: 21rpx 23rpx; }
+.answer-selected .answer-marker { background: var(--accent); border-color: var(--accent); }
+.skip-row { display: flex; justify-content: center; gap: 24rpx; margin-top: 16rpx; }
+.quiz-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 16rpx 28rpx calc(16rpx + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1rpx solid var(--line); }
+.quiz-footer button { min-width: 140rpx; }
+.quiz-footer button[disabled] { background: transparent; opacity: .45; }
+.footer-balance { width: 140rpx; }
+.submit-mark { width: 144rpx; height: 144rpx; margin: 0 auto 40rpx; border: 1rpx solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; }

@@ -1,0 +1,5 @@
+{
+  "peak_life_results": { "read": false, "write": false },
+  "peak_life_requests": { "read": false, "write": false },
+  "peak_life_shares": { "read": false, "write": false }
+}

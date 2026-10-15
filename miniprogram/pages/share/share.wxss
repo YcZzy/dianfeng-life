@@ -1,0 +1,9 @@
+.share-card { border: 1rpx solid #D1D5CC; background: #E9EDE4; border-radius: 24rpx; padding: 32rpx; }
+.share-rank { font-size: 42rpx; line-height: 1.5; font-weight: 600; color: var(--accent); padding: 44rpx 0 28rpx; }
+.share-rule { height: 1rpx; background: #CBD2C7; margin-bottom: 26rpx; }
+.share-title { font-family: "Songti SC", "STSong", serif; font-size: 46rpx; line-height: 1.4; font-weight: 600; margin-top: 16rpx; }
+.share-line { font-size: 29rpx; margin-top: 20rpx; line-height: 1.8; }
+.share-note { color: var(--muted); font-size: 23rpx; margin-top: 36rpx; line-height: 1.8; }
+.privacy-summary { display: flex; align-items: flex-start; gap: 12rpx; }
+.privacy-summary ui-icon { margin-top: 4rpx; }
+.poster-canvas { width: 600px; height: 900px; position: fixed; left: -3000px; top: 0; pointer-events: none; }

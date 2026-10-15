@@ -1,0 +1,5 @@
+.record { padding: 0 24rpx; margin-bottom: 20rpx; }
+.record-open { display: flex; align-items: center; width: 100%; text-align: left; padding: 24rpx 0; gap: 16rpx; }
+.record-title { margin: 8rpx 0; }
+.record-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1rpx solid var(--line); }
+.record-bottom .text-btn { font-size: 23rpx; }

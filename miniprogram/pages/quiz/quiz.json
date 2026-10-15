@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "生活配置测试",
+  "usingComponents": {
+    "ui-icon": "/components/icon/icon"
+  }
+}

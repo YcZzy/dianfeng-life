@@ -1,0 +1,11 @@
+{
+  "name": "dianfeng-life-v2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "巅峰人生 · 原生微信云开发小程序",
+  "scripts": {
+    "generate": "node scripts/generate-content.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node scripts/check-project.js"
+  }
+}
