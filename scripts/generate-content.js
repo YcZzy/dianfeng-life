@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(root, 'docs/QUESTION_BANK.md'), 'utf8');
+const source = fs.readFileSync(path.join(root, 'docs/QUESTION_BANK.md'), 'utf8').replace(/\r\n?/g, '\n');
 const blocks = [...source.matchAll(/^### (Q\d{2})｜([^\n]+)\n([\s\S]*?)(?=\n### |\n## |(?![\s\S]))/gm)];
 const questions = blocks.map(([, id, heading, block]) => {
   const title = block.match(/\*\*([^*]+)\*\*/)[1];
@@ -29,6 +29,4 @@ for (const relative of ['miniprogram/data/questions.js', 'cloudfunctions/peakLif
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, (relative.endsWith('.js') ? 'module.exports = ' : '') + JSON.stringify(content, null, 2) + (relative.endsWith('.js') ? ';\n' : '\n'));
 }
-const oldPublicJson = path.join(root, 'miniprogram/data/questions.json');
-if (fs.existsSync(oldPublicJson)) fs.unlinkSync(oldPublicJson);
 console.log(`Generated ${questions.length} questions; public bundle contains wording only.`);

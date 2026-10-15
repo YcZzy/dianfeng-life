@@ -27,7 +27,7 @@ function harness({ saved = null, call = () => Promise.reject(new Error('offline'
 }
 function choose(page, qid, oid) { page.onChoose({ currentTarget: { dataset: { qid, oid } } }); }
 test('actual quiz page advances after a single tap and ignores the old rendered event', () => {
-  const h = harness(); h.page.onLoad({ sample: '1' });
+  const h = harness(); h.page.onLoad({});
   choose(h.page, 'Q01', 'D');
   choose(h.page, 'Q01', 'E');
   h.fire();
@@ -37,20 +37,23 @@ test('actual quiz page advances after a single tap and ignores the old rendered 
   assert.equal(h.page.quiz.state.answers.Q02, undefined);
 });
 test('actual page hide prevents timer from moving an unseen question', () => {
-  const h = harness(); h.page.onLoad({ sample: '1' });
+  const h = harness(); h.page.onLoad({});
   choose(h.page, 'Q01', 'D'); h.page.onHide(); h.fire();
   assert.equal(h.page.quiz.state.cursor, 0);
   h.page.onShow(); choose(h.page, 'Q01', 'E'); h.fire();
   assert.equal(h.page.quiz.state.cursor, 1);
 });
-test('last sample answer automatically opens fixed example and never calls cloud', () => {
-  let calls = 0;
-  const h = harness({ call: () => { calls += 1; return Promise.resolve({}); } });
-  h.page.onLoad({ sample: '1' }); h.page.quiz.state.cursor = 25; h.page.render();
-  choose(h.page, 'Q26', 'B'); h.fire();
-  assert.deepEqual(h.navigations, ['/pages/result/result?sample=1']);
-  assert.equal(calls, 0);
-  assert.equal(h.snapshots.length, 0);
+test('last answer submits to cloud before opening the saved report', async () => {
+  const calls = [];
+  const h = harness({ call: (action, payload) => { calls.push({ action, payload }); return Promise.resolve({ report: { id: 'saved-report' } }); } });
+  h.page.onLoad({});
+  for (const q of bank.questions) { choose(h.page, q.id, q.options[0].id); h.fire(); }
+  await new Promise((done) => setImmediate(done));
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].action, 'submit');
+  assert.equal(Object.keys(calls[0].payload.answers).length, 26);
+  assert.deepEqual(h.navigations, ['/pages/result/result?id=saved-report']);
+  assert.equal(h.getDraft(), null);
 });
 test('cloud response while hidden waits until foreground before opening report', async () => {
   const answers = Object.fromEntries(bank.questions.map((q) => [q.id, q.options[0].id]));

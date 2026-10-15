@@ -3,14 +3,12 @@ const { createQuiz } = require('../../core/quiz-state');
 const draft = require('../../core/draft');
 const api = require('../../core/api');
 Page({
-  data: { question: null, options: [], skips: [], selected: '', number: 1, total: content.questions.length, progress: 0, phase: 'answering', error: '', helpOpen: false, sample: false, storageError: '' },
-  onLoad(options) {
-    this.sample = options.sample === '1';
+  data: { question: null, options: [], skips: [], selected: '', number: 1, total: content.questions.length, progress: 0, phase: 'answering', error: '', helpOpen: false, storageError: '' },
+  onLoad() {
     this.visible = true;
-    const saved = this.sample ? null : draft.read();
+    const saved = draft.read();
     this.quiz = createQuiz(content.questions, saved || { requestId: draft.requestId() });
     if (!this.quiz.state.requestId) this.quiz.state.requestId = draft.requestId();
-    this.setData({ sample: this.sample });
     this.render();
     if (this.quiz.state.phase === 'ready') this.submit();
   },
@@ -23,7 +21,7 @@ Page({
     if (this.quiz) { this.quiz.pause(); this.persist(); }
   },
   persist() {
-    if (this.sample || !this.quiz || this.completed) return;
+    if (!this.quiz || this.completed) return;
     try { draft.save(this.quiz.snapshot()); }
     catch (_) { if (!this.disposed) this.setData({ storageError: '本机暂时无法保存进度，请保持页面打开直至提交完成。' }); }
   },
@@ -69,13 +67,12 @@ Page({
   onRetry() { this.submit(); },
   submit() {
     if (this.sending || this.disposed) return;
-    if (this.sample) { wx.redirectTo({ url: '/pages/result/result?sample=1' }); return; }
     this.sending = true;
     this.quiz.state.submittedAnswers = Object.assign({}, this.quiz.state.answers);
     const submittedId = this.quiz.state.requestId;
     this.setData({ phase: 'submitting', error: '' });
     this.persist();
-    api.call('submit', { requestId: this.quiz.state.requestId, quizVersion: content.version, answers: this.quiz.state.answers, contribute: false }).then((r) => {
+    api.call('submit', { requestId: this.quiz.state.requestId, quizVersion: content.version, answers: this.quiz.state.answers }).then((r) => {
       this.sending = false;
       this.completed = true;
       try {

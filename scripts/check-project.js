@@ -24,6 +24,10 @@ const serverBank = require('../cloudfunctions/peakLifeApi/lib/questions.json');
 assert.deepEqual(bank, serverBank);
 assert.equal(bank.questions.length, 26);
 assert.equal(new Set(bank.questions.map((q) => q.id)).size, 26);
+assert.equal(bank.questions.filter(q => q.kind === 'P').length, 19);
+assert.equal(bank.questions.filter(q => q.kind === 'I').length, 5);
+assert.equal(bank.questions.filter(q => q.kind === 'C').length, 2);
+assert.ok(bank.questions.every(q => q.options.every(o => !o.text.includes('\r'))), 'Question text must not contain CRLF artifacts');
 assert.ok(!/"score"\s*:|"probabilities"\s*:/.test(JSON.stringify(bank)), 'Client questions must not hold scores/model priors');
 const miniFiles = all.filter((v) => v.startsWith(path.join(root, 'miniprogram')));
 for (const file of miniFiles.filter((v) => /\.(js|wxml|wxss)$/.test(v))) {

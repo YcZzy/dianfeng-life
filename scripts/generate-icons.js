@@ -17,8 +17,7 @@ const shapes = {
   history: '<path d="M3 4v5h5M3 9a9 9 0 1 1 0 6M12 7v5l3 2"/>',
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/>',
   note: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6m-6 4h6m-6 4h3"/>',
-  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
-  refresh: '<path d="M20 4v6h-6M4 20v-6h6M20 10a8 8 0 0 0-14-5M4 14a8 8 0 0 0 14 5"/>'
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'
 };
 const colors = { ink: '#242B29', muted: '#64706A', accent: '#A63E2C', white: '#FFFFFF' };
 const icons = {};
@@ -32,4 +31,4 @@ Object.keys(shapes).forEach((name) => {
 const dest = path.join(__dirname, '../miniprogram/components/icon/icons.js');
 fs.mkdirSync(path.dirname(dest), { recursive: true });
 fs.writeFileSync(dest, 'module.exports = ' + JSON.stringify(icons) + ';\n');
-console.log('Generated 18 consistent line icons.');
+console.log(`Generated ${Object.keys(shapes).length} consistent line icons.`);

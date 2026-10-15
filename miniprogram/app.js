@@ -1,6 +1,6 @@
 const config = require('./config');
 App({
-  globalData: { cloudReady: false, sampleMode: false, bootError: '' },
+  globalData: { cloudReady: false, bootError: '' },
   onLaunch() {
     if (!config.cloudEnv) {
       this.globalData.bootError = '云开发环境尚未配置';

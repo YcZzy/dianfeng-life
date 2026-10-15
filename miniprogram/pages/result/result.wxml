@@ -2,10 +2,9 @@
   <block wx:if="{{loading}}"><view class="skeleton" style="height:500rpx;"></view><view class="skeleton"></view></block>
   <view wx:elif="{{error}}" class="center-state"><ui-icon name="info" color="accent" size="64" /><view class="section-title">报告暂时没有打开</view><view class="error" role="alert">{{error}}</view><button class="btn btn-primary" bindtap="fetch">重新加载</button><button class="text-btn" bindtap="onHome">返回首页</button></view>
   <block wx:elif="{{report}}">
-    <view wx:if="{{sample}}" class="sample-notice">固定示例报告 · 不代表你的作答结果</view>
-    <view class="between"><text class="eyebrow">你的生活配置报告</text><text class="tag">{{sample ? '界面示例' : '本次结果'}}</text></view>
+    <view class="between"><text class="eyebrow">你的生活配置报告</text><text class="tag">本次结果</text></view>
     <view class="rank-area">
-      <block wx:if="{{report.rank.available}}"><view class="caption rank-label">{{sample ? '示例 · 估算超过' : '综合生活状态 · 估算超过'}}</view><view class="rank-number num">{{report.rank.percent}}<text>%</text></view><view class="rank-tail">的同龄人</view></block>
+      <block wx:if="{{report.score !== null}}"><view class="caption rank-label">本次综合生活指数</view><view class="rank-number num">{{report.score}}<text> / 100</text></view></block>
       <block wx:else><view class="title no-rank">{{report.rank.headline}}</view></block>
       <view class="rank-note">{{report.rank.note}}</view>
     </view>

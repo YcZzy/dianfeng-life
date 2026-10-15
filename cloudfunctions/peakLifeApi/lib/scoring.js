@@ -11,8 +11,8 @@ const SCORE = {
 const GROUPS={E:['Q05','Q09','Q16','Q22'],G:['Q13','Q19','Q23'],B:['Q03','Q10','Q21'],T:['Q11','Q17','Q25'],R:['Q08','Q18','Q24'],A:['Q04','Q14','Q26']};
 function points(id,answer){const value=SCORE[id]?.[String(answer).charCodeAt(0)-65];return Number.isFinite(value)?value:null;}
 function weighted(items){const valid=items.filter(([v])=>v!==null);return valid.length?valid.reduce((n,[v,w])=>n+v*w,0)/valid.reduce((n,[,w])=>n+w,0):null;}
-function scoreAnswers(answers, mask){
- const p=Object.fromEntries(Object.keys(SCORE).map(id=>[id,(!mask||mask[id])?points(id,answers[id]):null]));
+function scoreAnswers(answers){
+ const p=Object.fromEntries(Object.keys(SCORE).map(id=>[id,points(id,answers[id])]));
  const raw={ E:weighted([[p.Q05,.35],[weighted([[p.Q09,1],[p.Q22,1]]),.25],[p.Q16,.4]]),
  G:weighted(GROUPS.G.map(q=>[p[q],1])), B:weighted([[weighted([[p.Q03,1],[p.Q10,1]]),.8],[p.Q21,.2]]),
  T:weighted(GROUPS.T.map(q=>[p[q],1])), R:weighted(GROUPS.R.map(q=>[p[q],1])), A:weighted(GROUPS.A.map(q=>[p[q],1])) };

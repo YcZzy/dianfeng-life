@@ -24,10 +24,9 @@ function drawPoster(canvas, summary, dpr) {
   ctx.fillText('巅峰人生 / LIFE INDEX', 44, 62);
   ctx.strokeStyle = '#DDDCD3'; ctx.beginPath(); ctx.moveTo(44, 88); ctx.lineTo(556, 88); ctx.stroke();
   ctx.fillStyle = '#64706A'; ctx.font = '21px sans-serif'; ctx.fillText('我的生活配置报告', 44, 138);
-  const match = summary.rankHeadline.match(/(\d+)%/);
-  if (match) {
-    ctx.fillStyle = '#A63E2C'; ctx.font = '126px sans-serif'; ctx.fillText(match[1] + '%', 38, 282);
-    ctx.fillStyle = '#242B29'; ctx.font = '27px sans-serif'; ctx.fillText('估算超过的同龄人比例', 44, 330);
+  if (Number.isFinite(summary.score)) {
+    ctx.fillStyle = '#A63E2C'; ctx.font = '126px sans-serif'; ctx.fillText(String(summary.score), 38, 282);
+    ctx.fillStyle = '#242B29'; ctx.font = '27px sans-serif'; ctx.fillText('综合生活指数 / 100', 44, 330);
   } else {
     ctx.fillStyle = '#242B29'; ctx.font = '32px sans-serif';
     wrapText(ctx, summary.rankHeadline, 510).forEach((line, i) => ctx.fillText(line, 44, 220 + i * 46));

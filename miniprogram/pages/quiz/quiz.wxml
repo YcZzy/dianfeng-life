@@ -1,5 +1,4 @@
 <view class="page quiz">
-  <view wx:if="{{sample}}" class="tag tag-accent preview-tag">界面体验 · 完成后展示固定示例，不上传答案</view>
   <block wx:if="{{phase === 'answering'}}">
     <view class="between"><text class="eyebrow">生活配置测试</text><text class="caption num">{{number}}<text class="question-count"> / {{total}}</text></text></view>
     <view class="progress-track"><view class="progress-fill" style="width:{{progress}}%;"></view></view>

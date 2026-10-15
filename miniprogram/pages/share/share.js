@@ -1,21 +1,16 @@
 const api = require('../../core/api');
 const poster = require('../../core/poster');
 Page({
-  data: { loading: true, error: '', summary: null, publicView: false, sample: false, token: '', creating: false, generating: false, revoked: false, actionError: '' },
+  data: { loading: true, error: '', summary: null, publicView: false, token: '', creating: false, generating: false, revoked: false, actionError: '' },
   onLoad(options) {
     wx.hideShareMenu();
     this.id = options.id || '';
-    this.sample = options.sample === '1';
     this.incomingToken = options.token || '';
     this.fetch();
   },
   onUnload() { this.disposed = true; },
   fetch() {
     this.setData({ loading: true, error: '' });
-    if (this.sample) {
-      this.setData({ loading: false, sample: true, summary: poster.publicSummary(require('../../data/sample')) });
-      return;
-    }
     const action = this.incomingToken ? 'getShare' : 'getResult';
     api.call(action, this.incomingToken ? { token: this.incomingToken } : { id: this.id }).then((r) => {
       if (this.disposed) return;
@@ -24,7 +19,7 @@ Page({
     }).catch((e) => { if (!this.disposed) this.setData({ loading: false, error: e.message, publicView: !!this.incomingToken }); });
   },
   onCreate() {
-    if (this.data.creating || this.sample) return;
+    if (this.data.creating) return;
     this.setData({ creating: true, actionError: '' });
     api.call('createShare', { id: this.id }).then((r) => {
       if (this.disposed) return;

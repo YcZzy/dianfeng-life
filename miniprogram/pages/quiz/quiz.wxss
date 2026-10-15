@@ -1,5 +1,4 @@
 .quiz { padding-bottom: calc(150rpx + env(safe-area-inset-bottom)); }
-.preview-tag { margin-bottom: 24rpx; }
 .question-count { color: var(--muted); font-size: 24rpx; }
 .progress-track { height: 6rpx; background: #DDDED5; border-radius: 6rpx; margin: 22rpx 0 40rpx; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--accent); border-radius: 6rpx; }

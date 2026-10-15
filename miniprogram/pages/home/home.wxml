@@ -3,20 +3,14 @@
   <view class="hero">
     <view class="tag">全方位生活测试</view>
     <view class="hero-title"><view>你的人生，</view><view>是什么配置？</view></view>
-    <view class="hero-sub"><view>看看你在同龄人里的生活位置，</view><view>以及那个有点好笑、又有点像你的自己。</view></view>
+    <view class="hero-sub"><view>了解你当前六个方面的生活状态，</view><view>以及那个有点好笑、又有点像你的自己。</view></view>
   </view>
-  <button class="sample-card" bindtap="onSampleReport" aria-label="查看固定示例报告">
-    <view class="between"><text class="eyebrow">一份结果，长这样</text><text class="tag">示例</text></view>
-    <view class="sample-middle"><view><view class="caption">估算超过同龄人</view><view class="sample-number num">76<text>%</text></view></view><view class="sample-seal"><ui-icon name="compass" color="white" size="72" /></view></view>
-    <view class="sample-bottom"><view class="grow"><view class="sample-persona">缓冲区守护者</view><view class="caption">不一定每局都赢，但给自己留了退出键。</view></view><ui-icon name="chevron" size="32" /></view>
-  </button>
   <view class="dimension-strip"><view wx:for="{{axes}}" wx:key="id" class="dimension-item"><ui-icon name="{{item.icon}}" size="30" /><text>{{item.name}}</text></view></view>
   <view wx:if="{{error}}" class="error space" role="alert">{{error}}</view>
   <view class="start-area">
     <button class="btn btn-primary" bindtap="onStart"><text>{{hasDraft ? '继续上次测试' : '测出我的生活配置'}}</text><ui-icon name="arrow" color="white" size="38" /></button>
     <view class="caption start-meta">{{count}} 道选择题 · 选完自动下一题<text wx:if="{{hasDraft}}"> · 已答 {{answered}} 题</text></view>
-    <button wx:if="{{!cloudReady}}" class="text-btn" bindtap="onSampleQuiz">开发预览 · 体验答题流程<ui-icon name="arrow" color="muted" size="28" /></button>
   </view>
   <view class="home-links"><button class="text-btn" bindtap="onRecords"><ui-icon name="history" color="muted" size="28" />历史报告</button><view class="link-divider"></view><button class="text-btn" bindtap="onAbout">数据与隐私<ui-icon name="chevron" color="muted" size="26" /></button></view>
-  <view class="footer-note"><view>打开即用，不获取头像、昵称或手机号。</view><view>百分位为模型估算；具体收入、存款不会出现在分享卡中。</view></view>
+  <view class="footer-note"><view>打开即用，不获取头像、昵称或手机号。</view><view>结果由你的实际作答生成；具体收入、存款不会出现在分享卡中。</view></view>
 </view>
